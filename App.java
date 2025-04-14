@@ -40,6 +40,12 @@ public class App {
 
         System.out.print("Entrez le numéro de la tâche à supprimer : ");
         int userChoiceRemove = removeTaskInput.nextInt();
+
+        if (userChoiceRemove < 1 || userChoiceRemove > tasks.size()) {
+            System.out.println("Numéro invalide !");
+            return;
+        }  
+
         tasks.remove(userChoiceRemove - 1);
     }
 
@@ -47,8 +53,20 @@ public class App {
         Scanner checkTaskInput = new Scanner(System.in);
 
         System.out.print("Entrez le numéro de la tâche à valider : ");
-        int userChoiceRemove = checkTaskInput.nextInt();
-        tasks.get(userChoiceRemove - 1).setIsDone(true);
+        int userChoiceCheck = checkTaskInput.nextInt();
+
+        if (userChoiceCheck < 1 || userChoiceCheck > tasks.size()) {
+            System.out.println("Numéro invalide !");
+            return;
+        }        
+        
+        if (tasks.get(userChoiceCheck - 1).getIsDone() == false) {
+            tasks.get(userChoiceCheck - 1).setIsDone(true);
+        }
+
+        else {
+            tasks.get(userChoiceCheck - 1).setIsDone(false);
+        }
     }
 
     public void clearConsole() {
@@ -69,7 +87,7 @@ public class App {
             System.out.println("--------------------------");
             System.out.println("1 - Ajouter une tâche");
             System.out.println("2 - Supprimer une tâche");
-            System.out.println("3 - Valider une tâche");
+            System.out.println("3 - Marquer une tâche");
             System.out.println("4 - Quitter l'application");
             System.out.print("----> ");
             int userChoice = userChoiceInput.nextInt();
