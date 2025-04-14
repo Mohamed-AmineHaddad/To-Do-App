@@ -38,35 +38,38 @@ public class App {
     public void removeTask(ArrayList<Task> tasks) { // Méthode permettant de supprimer une tâche de la liste
         Scanner removeTaskInput = new Scanner(System.in);
 
-        System.out.print("Entrez le numéro de la tâche à supprimer : ");
-        int userChoiceRemove = removeTaskInput.nextInt();
-
-        if (userChoiceRemove < 1 || userChoiceRemove > tasks.size()) {
-            System.out.println("Numéro invalide !");
-            return;
-        }  
-
-        tasks.remove(userChoiceRemove - 1);
+        try {
+            System.out.print("Entrez le numéro de la tâche à supprimer : ");
+            int userChoiceRemove = removeTaskInput.nextInt();
+    
+            if (userChoiceRemove < 1 || userChoiceRemove > tasks.size()) {
+                return;
+            }
+            tasks.remove(userChoiceRemove - 1);
+        } 
+        catch (InputMismatchException e) {}
     }
 
     public void checkTask(ArrayList<Task> tasks) {
         Scanner checkTaskInput = new Scanner(System.in);
 
-        System.out.print("Entrez le numéro de la tâche à valider : ");
-        int userChoiceCheck = checkTaskInput.nextInt();
+        try {
+            System.out.print("Entrez le numéro de la tâche à valider : ");
+            int userChoiceCheck = checkTaskInput.nextInt();
 
-        if (userChoiceCheck < 1 || userChoiceCheck > tasks.size()) {
-            System.out.println("Numéro invalide !");
+            if (userChoiceCheck < 1 || userChoiceCheck > tasks.size()) {
             return;
-        }        
+            }        
         
-        if (tasks.get(userChoiceCheck - 1).getIsDone() == false) {
-            tasks.get(userChoiceCheck - 1).setIsDone(true);
-        }
+            if (tasks.get(userChoiceCheck - 1).getIsDone() == false) {
+                tasks.get(userChoiceCheck - 1).setIsDone(true);
+            }
 
-        else {
-            tasks.get(userChoiceCheck - 1).setIsDone(false);
-        }
+            else {
+                tasks.get(userChoiceCheck - 1).setIsDone(false);
+            }
+            
+        } catch (InputMismatchException e) {}
     }
 
     public void clearConsole() {
@@ -78,7 +81,7 @@ public class App {
     public void appLoop(ArrayList<Task> tasks) {
 
         Scanner userChoiceInput = new Scanner(System.in);
-
+    
         while (true) {
             System.out.println("[ To-Do List ]");
             System.out.println("--------------------------");
@@ -90,32 +93,43 @@ public class App {
             System.out.println("3 - Marquer une tâche");
             System.out.println("4 - Quitter l'application");
             System.out.print("----> ");
-            int userChoice = userChoiceInput.nextInt();
+    
+            String input = userChoiceInput.nextLine(); // on lit toute la ligne
+    
+            int userChoice;
+    
+            try {
+                userChoice = Integer.parseInt(input); // conversion en int
+            } catch (NumberFormatException e) {
+                clearConsole();
+                continue;
+            }
     
             if (userChoice == 1) {
                 addTask(tasks);
             }
-
+    
             else if (userChoice == 2) {
                 removeTask(tasks);
             }
-
+    
             else if (userChoice == 3) {
                 checkTask(tasks);
             }
-            
+    
             else if (userChoice == 4) {
                 System.out.println("À bientôt !");
                 break;
             }
-
+    
             else {
-                System.out.println("Veuillez choisir une option valide");
+                clearConsole();
             }
-
+    
             clearConsole();
         }
     }
+    
 
 
     @Override
