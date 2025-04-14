@@ -54,7 +54,7 @@ public class App {
         Scanner checkTaskInput = new Scanner(System.in);
 
         try {
-            System.out.print("Entrez le numéro de la tâche à valider : ");
+            System.out.print("Entrez le numéro de la tâche à cocher / décocher : ");
             int userChoiceCheck = checkTaskInput.nextInt();
 
             if (userChoiceCheck < 1 || userChoiceCheck > tasks.size()) {
