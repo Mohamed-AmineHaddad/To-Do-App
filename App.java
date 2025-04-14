@@ -50,7 +50,7 @@ public class App {
         catch (InputMismatchException e) {}
     }
 
-    public void checkTask(ArrayList<Task> tasks) {
+    public void toggleTaskStatus(ArrayList<Task> tasks) {
         Scanner checkTaskInput = new Scanner(System.in);
 
         try {
@@ -114,7 +114,7 @@ public class App {
             }
     
             else if (userChoice == 3) {
-                checkTask(tasks);
+                toggleTaskStatus(tasks);
             }
     
             else if (userChoice == 4) {
