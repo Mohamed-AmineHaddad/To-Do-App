@@ -7,6 +7,6 @@ public class Main {
 
         App app1 = new App("ToDoApp", taskList);
 
-        app1.appLoop(taskList);
+        app1.appLoop();
     }
 }

@@ -13,60 +13,60 @@ public class App {
         return this.tasks;
     }
 
-    public void displayTasks(ArrayList<Task> tasks) {
-        for (int i = 0; i < tasks.size(); i++) {
+    public void displayTasks() {
+        for (int i = 0; i < this.tasks.size(); i++) {
 
-            if (tasks.get(i).getIsDone() == false) { // Si tâche non accomplie, afficher une case vide [ ]
-                System.out.println(i + 1 + " [" + ' ' + "] " + tasks.get(i).getName());
+            if (this.tasks.get(i).getIsDone() == false) { // Si tâche non accomplie, afficher une case vide [ ]
+                System.out.println(i + 1 + " [" + ' ' + "] " + this.tasks.get(i).getName());
             }
 
             else { // Si tâche accomplie, afficher une case cochée [X]
-                System.out.println(i + 1 + " [" + 'X' + "] " + tasks.get(i).getName());
+                System.out.println(i + 1 + " [" + 'X' + "] " + this.tasks.get(i).getName());
             }
         }
     }
 
-    public void addTask(ArrayList<Task> tasks) { // Méthode permettant d'ajouter une tâche à la liste
+    public void addTask() { // Méthode permettant d'ajouter une tâche à la liste
         Scanner addTaskInput = new Scanner(System.in);
 
         System.out.print("Entrez le nom de la tâche à ajouter : ");
         String userChoiceAdd = addTaskInput.nextLine();
         Task task = new Task(userChoiceAdd, false);
-        tasks.add(task);
+        this.tasks.add(task);
     }
 
-    public void removeTask(ArrayList<Task> tasks) { // Méthode permettant de supprimer une tâche de la liste
+    public void removeTask() { // Méthode permettant de supprimer une tâche de la liste
         Scanner removeTaskInput = new Scanner(System.in);
 
         try {
             System.out.print("Entrez le numéro de la tâche à supprimer : ");
             int userChoiceRemove = removeTaskInput.nextInt();
     
-            if (userChoiceRemove < 1 || userChoiceRemove > tasks.size()) {
+            if (userChoiceRemove < 1 || userChoiceRemove > this.tasks.size()) {
                 return;
             }
-            tasks.remove(userChoiceRemove - 1);
+            this.tasks.remove(userChoiceRemove - 1);
         } 
         catch (InputMismatchException e) {}
     }
 
-    public void toggleTaskStatus(ArrayList<Task> tasks) {
+    public void toggleTaskStatus() {
         Scanner checkTaskInput = new Scanner(System.in);
 
         try {
             System.out.print("Entrez le numéro de la tâche à cocher / décocher : ");
             int userChoiceCheck = checkTaskInput.nextInt();
 
-            if (userChoiceCheck < 1 || userChoiceCheck > tasks.size()) {
+            if (userChoiceCheck < 1 || userChoiceCheck > this.tasks.size()) {
             return;
             }        
         
-            if (tasks.get(userChoiceCheck - 1).getIsDone() == false) {
-                tasks.get(userChoiceCheck - 1).setIsDone(true);
+            if (this.tasks.get(userChoiceCheck - 1).getIsDone() == false) {
+                this.tasks.get(userChoiceCheck - 1).setIsDone(true);
             }
 
             else {
-                tasks.get(userChoiceCheck - 1).setIsDone(false);
+                this.tasks.get(userChoiceCheck - 1).setIsDone(false);
             }
             
         } catch (InputMismatchException e) {}
@@ -78,7 +78,7 @@ public class App {
     }
     
 
-    public void appLoop(ArrayList<Task> tasks) {
+    public void appLoop() {
 
         Scanner userChoiceInput = new Scanner(System.in);
     
@@ -86,7 +86,7 @@ public class App {
             System.out.println("[ To-Do List ]");
             System.out.println("--------------------------");
             System.out.println("Liste des tâches");
-            displayTasks(tasks);
+            displayTasks();
             System.out.println("--------------------------");
             System.out.println("1 - Ajouter une tâche");
             System.out.println("2 - Supprimer une tâche");
@@ -106,15 +106,15 @@ public class App {
             }
     
             if (userChoice == 1) {
-                addTask(tasks);
+                addTask();
             }
     
             else if (userChoice == 2) {
-                removeTask(tasks);
+                removeTask();
             }
     
             else if (userChoice == 3) {
-                toggleTaskStatus(tasks);
+                toggleTaskStatus();
             }
     
             else if (userChoice == 4) {
@@ -130,7 +130,6 @@ public class App {
         }
     }
     
-
 
     @Override
     public String toString() {
